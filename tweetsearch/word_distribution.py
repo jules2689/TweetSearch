@@ -18,15 +18,36 @@ class WordDistribution:
   def __init__(self):
     self.tweets = []
     self.stops = self.stops()
-    self.schema = Schema(title=TEXT(stored=True), content=TEXT)
+    self.schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True))
 
   def run(self):
     self.setup_text()
     if not os.path.exists("indexdir"):
       os.mkdir("indexdir")
-    index = self.whoosh_it()
-    query = "world"
-    self.whoosh_query_index(index, query)
+    self.index = self.whoosh_it()
+
+  def query(self, search_query):
+    qp = QueryParser("content", schema=self.schema)
+    q = qp.parse(search_query)
+
+    with self.index.searcher() as searcher:
+      results = searcher.search(q, limit=800, terms=True)
+      self.print_results(results)
+
+  def print_results(self, results):
+    found = results.scored_length()
+    if results.has_exact_length():
+      print("Scored", found, "of exactly", len(results), "documents")
+    else:
+      low = results.estimated_min_length()
+      high = results.estimated_length()
+      if low == high:
+        print("Scored", found, "of ", low, "documents")
+      else:
+        print("Scored", found, "of between", low, "and", high, "documents")
+
+    for hit in results:
+      print(hit["title"], " - ", hit["content"])
 
   def setup_text(self):
     text = open(self.path('data.txt'), 'r').read()
@@ -49,10 +70,6 @@ class WordDistribution:
     valid = len(word) > 3
     valid = valid and word.lower() not in self.stops
     return valid
-
-  def present_distribution(self):
-    fdist = FreqDist(self.tweets)
-    print fdist.most_common(100)
 
   def whoosh_it(self):
     print "Building Index..."
