@@ -1,8 +1,8 @@
 ==========
-AutoTagger
+TweetSearch
 ==========
 
-This is the documentation of **AutoTagger**.
+This is the documentation of **TweetSearch**.
 
 .. note::
 

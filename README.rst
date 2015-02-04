@@ -1,5 +1,5 @@
 ==========
-AutoTagger
+TweetSearch
 ==========
 
 Your project was successfully set up with PyScaffold 1.4.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from autotagger import WordDistribution
+from tweetsearch import WordDistribution
 
 wd = WordDistribution()
 wd.run()

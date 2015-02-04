@@ -14,8 +14,8 @@ git_full = "$Format:%H$"
 
 # these strings are filled in when 'setup.py versioneer' creates _version.py
 tag_prefix = "v"
-parentdir_prefix = "autotagger-"
-versionfile_source = "autotagger/_version.py"
+parentdir_prefix = "tweetsearch-"
+versionfile_source = "tweetsearch/_version.py"
 
 import os, sys, re, subprocess, errno
 
