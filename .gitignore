@@ -39,4 +39,4 @@ cover/*
 MANIFEST
 
 # Index storage directory
-indexdir/*
+tweetsearch/indexdir/*

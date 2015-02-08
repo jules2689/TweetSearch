@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from tweetsearch import WordDistribution
+from tweetsearch import batch_run_queries as BatchRunQueries
 
-wd = WordDistribution()
-wd.run()
+bq = BatchRunQueries.BatchRunQueries()
+bq.run()
