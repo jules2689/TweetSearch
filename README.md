@@ -158,7 +158,7 @@ BM25F is a ranking function used by search engines. It ranks documents based on 
 
 A rank is determined by the number of query terms in a given document regardless of any inter-relationship between query terms (for example, close proximity in a document).
 
-The score is based on the inverse document frequency (IDF) and the overall term frequency.
+The score is based on the inverse document frequency (IDF) and the overall term frequency weighted by the length of the document.
 
 ##### TF-IDF
 Currently, the scoring analysis in use is TF_IDF.
@@ -166,6 +166,8 @@ Currently, the scoring analysis in use is TF_IDF.
 TF IDF is the product of 2 statistics, the "term frequency" (TF) and the "inverse document frequency" (IDF). The term frequency can be determined by any number of methods including the "raw frequency" and an "augmented frequency" which weights the frequency based on the length of the document.
 
 This algorithm bases the relevance of a document on a the term frequency and the inverse term frequency so that common words, such as "the" is does not impact the results, as it will irrelevantly be more common in many documents.
+
+As you can see, these algorithms are very similar and were used to simply experiment with their differences. Due to their similarity and the relatively small index, the differences were not significant.
 
 ### Data Structures
 The majority of the preprocessing, indexing and retrieval is performed using Libraries and classes.
