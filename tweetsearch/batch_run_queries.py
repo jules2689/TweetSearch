@@ -2,8 +2,7 @@
 # coding=utf-8
 from bs4 import BeautifulSoup
 import os
-import word_distribution as WordDistribution
-
+import indexer as Indexer
 
 class BatchRunQueries:
 
@@ -13,13 +12,13 @@ class BatchRunQueries:
 
 	def run(self):
 		self.extract_queries()
-		wd = WordDistribution.WordDistribution()
-		wd.run()
+		idx = Indexer.Indexer()
+		idx.run()
 
 		print "Running Queries on index:"
 		i = 0
 		for query in self.queryTexts:
-			wd.query(self.queryNums[i], query)
+			idx.query(self.queryNums[i], query)
 			i += 1
 
 	def path(self, file_name):
@@ -33,7 +32,8 @@ class BatchRunQueries:
 		soup = BeautifulSoup(text)
 
 		for nums in soup.find_all('num'):
-			self.queryNums.append(nums.string.split(" ")[2])
+			num = int(nums.string.split(" ")[2].replace("MB",""))
+			self.queryNums.append(num)
 
 		for text in soup.find_all('title'):
 			self.queryTexts.append(text.string)
