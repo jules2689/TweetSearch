@@ -16,7 +16,7 @@ How to run
  1. Run `pip install -r requirements.txt`
  2. Run `python -i run.py`
  3. Wait for the index to occur
- 4. Batch Queries are then performed and results are printed onto the scren.
+ 4. Batch Queries are then performed and results are printed onto the screen.
 
 How to Evalutate
 ---
@@ -27,6 +27,37 @@ How to Evalutate
  5. Run `./trec_eval Trec_microblog11-qrels.txt results.txt`
 
 Now when you run run.py it will take the query texts, and batch run them, and just dump in console directly the content of the results file
+
+---
+
+How was the work divided
+---
+The work was divided in a very ad-hoc manner, combined with a bit of Agile development. What this means to say is that the requirements for this assignment was treated as a series of stories broken down as such:
+
+ 1. Preprocessing
+ 2. Indexing
+ 3. Retrieval and Ranking
+ 4. Results
+ 5. Evaluation
+ 6. Report
+ 7. Cleanup and Verification of Code
+ 8. Optimizations
+
+During the initial stages, Julian started by writing a small preprocessing script. This was developed at first to present a simple word frequency pattern.
+
+After the initial preprocessing of the tweets, Emilienne worked to integration Whoosh to perform our indexing and our retrieval/ranking. Whoosh provided a good backbone for both of these features so that they went hand in hand.
+
+Emilienne then provided the outputted results in the correct format since these are a result of the retrieval process.
+
+Next, Evaluation was used to determine weak points in the indexing method. Once these weak points were discovered, optimization stories were further flushed out. This was determined by both team members.
+
+The Report was then started as a way to take note and verify the code structure (as the functionality portion was filled in). This report was started by Julian.
+
+During the reporting phase, Julian took the time to split up classes that had become too large and cleanup the code. He split the concerns of various sections into their own classes and renamed code where necessary. He removed unused requirements and imports, as well as vestigial methods.
+
+Optimizations were then performed by both team members. These optimizations were determined through analysis, evaluation and discussions.
+
+Discussions were held between the team members throughout the project to determine which sections must be completed and which goals we were to reach.
 
 ---
 
@@ -57,11 +88,13 @@ This schema indicates that we have a title and content, both text and both store
 The Stemming Analyzer also takes care of removing and ignoring stop words that we manually define.
 The library takes care of the fine detailed implementation.
 
+```
   for tweet in self.tweets:
     tweet = tweet.split("\t")
     tweetNum = tweet[0]
     tweetContent = tweet[1]
     writer.add_document(title=u(tweetNum), content=u(tweetContent))
+```
 
 This piece of code loops through the tweets and starts to build the text. For each tweet, we split on the tab character.
 The first section is the tweetNum, which is stored as the title.
