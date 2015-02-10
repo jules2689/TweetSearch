@@ -21,7 +21,10 @@ class Indexer:
     self.preprocessor = Preprocessing.Preprocessing()
     #Stemmer also stems the query content
     stop_words = self.preprocessor.stops()
-    self.schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True, analyzer=StemmingAnalyzer(stoplist=stop_words)))
+    analyzer = StemmingAnalyzer(stoplist=stop_words)
+    analyzer.cachesize = -1 # Unbounded caching, but worse memory performance
+    analyzer.clear()
+    self.schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True, analyzer=analyzer))
 
   def run(self):
     self.tweets = self.preprocessor.preprocess()
