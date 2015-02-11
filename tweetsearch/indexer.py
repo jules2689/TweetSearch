@@ -24,6 +24,8 @@ class Indexer:
     stop_words = self.preprocessor.stops()
     analyzer = StemmingAnalyzer(stoplist=stop_words)
     analyzer.cachesize = -1 # Unbounded caching, but worse memory performance
+    file("results.txt", "w")
+    file("topResults.txt", "w")
     
     self.schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True, analyzer=analyzer))
 
@@ -42,11 +44,24 @@ class Indexer:
       results = searcher.search(q, limit=1000)
       reader = self.index.reader()
       self.print_results_to_file(search_query_num, search_query, results)
+      self.print_top_query_results(search_query_num, search_query, results)
 
   def print_results_to_file(self, queryNum, query, results):
     with open("results.txt", "a") as f: 
       for hit in results:
-        f.write('%s Q0 %s %d %d awesomenessRun\n' % (queryNum, hit["title"], hit.rank, hit.score))
+        f.write('%s Q0 %s %d %f awesomenessRun\n' % (queryNum, hit["title"], hit.rank, hit.score))
+
+  def print_top_query_results(self, queryNum, query, results):
+    if (queryNum == 1) or (queryNum == 25):
+      with open("topResults.txt", "a") as f:
+
+        f.write('Results for query: %s, %s\n' % (queryNum, query))
+
+        for hit in results:
+          if hit.rank < 10:
+            f.write('#%d: %s with score = %d\n' % (hit.rank + 1, hit["content"], hit.score))
+        f.write('\n')
+
 
   def whoosh_it(self):
     print "Building Index..."

@@ -1,0 +1,24 @@
+Results for query: 1,  BBC World Service staff cuts 
+#1: BBC News Major cuts to BBC World Service BBC World Service is to close five of its language services with th httpbbcine2vlpX with score = 45
+#2: Major cuts to BBC World Service BBC World Service is to close five of its language services with the likely lo httpbbcineftjNe with score = 40
+#3: BBC World Service axes five language services AFP  AFP  The BBC World Service has said it will close five o httpowly1b23Gf with score = 35
+#4: BBC News  BBC World Service cuts to be outlined to staff httpwwwbbccouknewsentertainmentarts12283356 with score = 32
+#5: BBC Caribbean to be shut down  Stabroek News  Guyana BBC BBC World Service today announced cuts which will  httpbitlyh9huts with score = 31
+#6: BBC World Service plans 650 job cuts AP  AP  The BBC said Wednesday that it plans to cut 650 jobs more tha httpowly1b2u20 with score = 31
+#7: One understands that the BBC World Service is to be renamed BBC Almost the Entire World Service with score = 30
+#8: RT QueenUK One understands that the BBC World Service is to be renamed BBC Almost the Entire World Service with score = 30
+#9: BBC World Service axes five languages 650 jobs AFP AFP  The BBC World Service said Wednesday it would  httpbitlyf1uNCb with score = 30
+#10: BBC World to slash five foreign services THE BBC World Service will shed around 500 jobs after announcing plans httpbitlyfR3vd8 with score = 30
+
+Results for query: 25,  TSA airport screening 
+#1: The TSAs New Scanners Spot Bombs Not Dongs Tsa httpdlvritFZn1C Tsa ãGIZMODEã with score = 19
+#2: TSA to vote on unionizing in March Great So when TSA employee gropes you youll have 5 other TSA guys standing around supervising tcot with score = 19
+#3: TSA to Test New Screening at HartsfieldJackson The TSA in coming days at HartsfieldJackson Atlanta Internatio httpbitlye8NW0S with score = 19
+#4: Background Screening  Top 5 Reasons to Organize Background Screening Background screening is becoming more pre httpbitlyiktHdI with score = 19
+#5: The TSA has a unique ability to make an airport seem busy even when it isnt tsa with score = 18
+#6: Power grab TSA fights to stop private screeners at airports despite new Congress and flyers wanting them httpbitlyfX0Qyd tsa with score = 18
+#7: New post Seattle man acquitted in TSA airport case See arrest video  Seattle Po httpbitlye1W2Wo TSABlogTeam BigSis Fascism TSA with score = 18
+#8: TF  Travel RT BitterAmerican TSA shuts door on private airport screening program  httpbitlyfx6Dgw cnn httpbitlyeADg2G with score = 17
+#9: TSA Shuts Down Private Airport Screen Program is headline now on wwwfedsmithcom with score = 17
+#10: TSA Shuts Door on Private Airport Screening Program â Patriot Update httppatriotupdatecom2451tsashutsdooronprivateairportscreeningprogramsmssstwitteratxt4d45868911137f910Â â¦ via AddThis with score = 17
+
