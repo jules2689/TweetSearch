@@ -41,11 +41,12 @@ class Indexer:
     with self.index.searcher(weighting=scoring.TF_IDF()) as searcher:
       results = searcher.search(q, limit=1000)
       reader = self.index.reader()
-      self.print_results(search_query_num, search_query, results)
+      self.print_results_to_file(search_query_num, search_query, results)
 
-  def print_results(self, queryNum, query, results):
-    for hit in results:
-      print queryNum, " Q0 ", hit["title"], " ", hit.rank, " ", hit.score, " awesomenessRun"
+  def print_results_to_file(self, queryNum, query, results):
+    with open("results.txt", "a") as f: 
+      for hit in results:
+        f.write('%s Q0 %s %d %d awesomenessRun\n' % (queryNum, hit["title"], hit.rank, hit.score))
 
   def whoosh_it(self):
     print "Building Index..."
