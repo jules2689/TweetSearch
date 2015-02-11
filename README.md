@@ -198,7 +198,7 @@ Initial optimizations included adding stop words. Initially, no stop words were 
 
 With regards to the StemmingAnalyzer, we switched the type of cache from "least recently used" (LRU) to an unbounded cache to decrease batch query time, but reduce memory performance. As a number of queries are being performed in quick succession, it may be necessary to use a number of cached stemming words. Since it can be assumed that the index is relatively small, and the memory capacity large, this unbounded cache may give a performance boost with no detriment due to the larger memory footprint.
 
-Other optimizations applied include the following. We switched to using "OR" grouping versus "AND" grouping, which means that any of terms could exist in any order, instead of all words existing in a document. This allowed more results to be returned in a query.
+We switched to using "OR" grouping versus "AND" grouping, which means that any of terms could, but do not have to, exist in any order, instead of all words existing in a document. This allowed more results to be returned in a query.
 
 TODO
 ---
