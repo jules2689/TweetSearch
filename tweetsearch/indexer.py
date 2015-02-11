@@ -23,7 +23,7 @@ class Indexer:
     stop_words = self.preprocessor.stops()
     analyzer = StemmingAnalyzer(stoplist=stop_words)
     analyzer.cachesize = -1 # Unbounded caching, but worse memory performance
-    analyzer.clear()
+    
     self.schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True, analyzer=analyzer))
 
   def run(self):
