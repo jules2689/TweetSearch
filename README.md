@@ -240,5 +240,8 @@ In the initial run, we ran with BM25F Weighting. We decided to test against TF-I
 | P_500                 |  all 0.0771          |  all 0.0778         |
 | P_1000                |  all 0.0450          |  all 0.0450         |
 
-Our mean average precision stood at about 25-26% throughout all queries. Using BM25F our general precision is quite a bit higher in most areas with about 6-13% higher precision than the respective score for TF-IDF. TF-IDF did retrieve slightly more relevant results (4), however the precision was, as previously mentioned, less precise.
+Our mean average precision stood at about 25-26% throughout all queries. Using BM25F our general precision is quite a bit higher in most areas with about 6-13% higher precision than the respective score for TF-IDF. TF-IDF did retrieve slightly more relevant results (4 more to be exact), however the precision was, as previously mentioned, less precise.
 
+With regards to the number of relevant documents versus those retrieved, we have 83.44% for BMF25 and 83.59% for TF-IDF. Both of these values seem to represent a large portion of the relevant documents available.
+
+In the end, with about 83-84% of the relvant documents retrieved and about a 26% precision, the indexing and retrieval performed by this project presents a fairly good representation of the relevant documents and a good result.
