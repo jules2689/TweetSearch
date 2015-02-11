@@ -88,15 +88,15 @@ Finally, it returns the processed tweets.
 **process_text**
 First, all punctuation is removed. 
 This is accomplished using a "translate" method in Python and the string.punctuation list.
-Finally, an array of text is returned by splitting the text by newline (each tweet is a line).
+Finally, an array of text is returned by splitting the text by newline (each tweet is a line). This array of text consists in the unique tweet id, a tab, and the tweet content.
 
 ### Indexing
 Indexing is accomplished using the `Whoosh` library available for Python. This library allows us to define an index "Schema"
 ```Schema(title=TEXT(stored=True), content=TEXT(stored=True, analyzer=StemmingAnalyzer(stoplist=stop_words)))```
 
-This schema indicates that we have a title and content, both text and both stored in the index, and that we want to analyze using Stemming.
-The Stemming Analyzer also takes care of removing and ignoring stop words that we manually define.
-The library takes care of the fine detailed implementation.
+This schema indicates that for each document/tweet we have a title and content, both text and both stored in the index. An additional argument is also added to indicate that we want to use a stemming analyzer.
+The Stemming Analyzer also takes care of removing and ignoring stop words that we manually defined using the file provided by Dr. Inkpen.
+The library takes care of the fine grained implementation of building the index from the tweets. The tweets served as the document inputs, and were added to the index in the following manner:
 
 ```
   for tweet in self.tweets:
@@ -115,10 +115,10 @@ Finally, we write the document to the corpus of documents in the indexer.
 The retrieval and ranking also uses the `Whoosh` library.
 
 First, we construct a query object that looks through the "content" in the index described by our schema.
-Second, with an index searcher that uses TF IDF weighting, we search the corpus of documents and extract up to 1000 results.
-We then print the results to the console using the TrecEval format.
+Second, with an index searcher that uses one of several kinds of weighting, we search the corpus of documents and extract up to 1000 results. At first the TF-IDF weighting was used, and then BM25 was used as well.
+We then print the results to a file using the TrecEval format, in order to evaluate them using the trec_eval script.
 
-Note: The query is performed using a Stemming Analyzer, which will analyze and ignore stop words.
+Note: The query is also evaluated using a Stemming Analyzer, which will analyze and ignore stop words.
 
 ---
 
@@ -128,14 +128,14 @@ Algorithms, Data Structures, and Optimizations
 ### Algorithms
 
 #### Preprocessing
-None in use.
+None in use beyond the prior mentioned scripts.
 
 #### Indexing
 There is a StemmingAnalyzer being used by the schema.
 
 Stemming is a heuristic process whereby the suffix (and sometimes prefix) of words is removed. For example the word "rendered", would be stemmed to "render", as would "renders", "rendering", "rendered" etc.
 
-The Stemming algorithm also removes stop words specified by a list.
+The Stemming algorithm also removes stop words specified by a list of common words in the English language.
 
 The Stemming algorithm employs a variety of algorithms including Porter and Porter2, Paice Husk, and Lovins.
 
@@ -168,46 +168,46 @@ BM25F is a ranking function used by search engines. It ranks documents based on 
 
 A rank is determined by the number of query terms in a given document regardless of any inter-relationship between query terms (for example, close proximity in a document).
 
-The score is based on the inverse document frequency (IDF) and the overall term frequency weighted by the length of the document, as well as a probabilistic factor.
+The score is based on the inverse document frequency (IDF) and the overall term frequency weighted by the length of the document.
 
 ##### TF-IDF
-Currently, the scoring analysis in use is TF_IDF.
+Another scoring analysis we used to generate results is TF_IDF.
 
-TF IDF is the product of 2 statistics, the "term frequency" (TF) and the "inverse document frequency" (IDF). The term frequency can be determined by any number of methods including the "raw frequency" and an "augmented frequency" which weights the frequency based on the length of the document.
+TF-IDF is the product of 2 statistics, the "term frequency" (TF) and the "inverse document frequency" (IDF). The term frequency can be determined by any number of methods including the "raw frequency" and an "augmented frequency" which weights the frequency based on the length of the document.
 
-This algorithm bases the relevance of a document on a the term frequency and the inverse term frequency so that common words, such as "the" is does not impact the results, as it will irrelevantly be more common in many documents.
+This algorithm bases the relevance of a document on the term frequency and the inverse term frequency so that common words, such as "the" does not impact the results, as it will irrelevantly be more common in many documents, and therefore a poor matching predictor.
 
-As you can see, these algorithms are very similar and were used to simply experiment with their differences. Due to their similarity and the relatively small index, the differences were not significant.
+These algorithms are similar and were both used in the generation of results and compared.
 
 ### Data Structures
-The majority of the preprocessing, indexing and retrieval is performed using Libraries and classes.
+The majority of the preprocessing, indexing and retrieval is abstracted and performed using libraries.
 
 #### Preprocessing
- - General Tweet content is initially held in a simple Array prior to indexing.
+ - General tweet content is initially held in a python list (essentially an array) prior to indexing. The BeautifulSoup library allows the text document in which the queries are stored with html markup to be parsed into a soup object. This object's attributes are the various tag labels from the query file (num, title, querytime, etc.). 
 
 #### Indexing
- - The index is held in a combination of an "index" and a "schema" object, the schema is only used in the initial creation.
- - The "schema" object stores information about the type of data and which data should be stored.
- - The "index" consumes the "schema" and created a "FileStorage" object which is stored in the "tweetsearch/indexdir" directory
+ - The index is held in a combination of an "index" and a "schema" object, the schema is only used in the initial creation, to define the fields required for each value of the index.
+ - The "schema" object stores information about the type of data and which data should be stored. In our case, we have the "content" which is the main tweet text, and the "title" which is the unique tweet id.
+ - The "index" consumes the "schema" and creates a "FileStorage" object which is stored in the "tweetsearch/indexdir" directory.
 
 #### Scoring and Retrieval
- - The "searcher" object that is used forms a sort of buffer that must closed at the end.
- - The "searcher" object consumes a "query" object that is constructed from a basic string
- - The execution of a search returns a "result" object, which is essentially just a list of hashes. Each has represents a document in the corpus.
+ - The "searcher" object that is used forms a sort of buffer that must closed once its purpose is fulfilled.
+ - The "searcher" object consumes a "query" object that is constructed from the content of the query text, as provided.
+ - The execution of a search returns a "result" object, which is essentially just a list of hashes. Each represents a document/tweet in the corpus.
 
 ### Optimizations for all sections
-Initial optimizations included adding stop words. Initially, no stop words were being removed. Our first step was to manually remove the stop words on preprocessing, but this proved to be a difficult task as the preprocessor did not differentiate between the tweet id and the content. We later moved this task to the time of indexing, but this proved to be a huge slow down on indexing (increasing the indexing time a few times over). Finally, it was determined that the Whoosh library supports a StemmingAnalyzer that will remove words from a stop list, and so the stop words was moved there with great success.
+Initial optimizations included adding stop words. Initially, no stop words were being removed. Our first step was to manually remove the stop words on preprocessing, but this proved to be a difficult task as the preprocessor did not differentiate between the tweet id and the content. We later moved this task to the time of indexing, but this proved to be a huge slow down on indexing (increasing the indexing time a few times over). Finally, it was determined that the Whoosh library supports a StemmingAnalyzer that will remove words from a provided stop list, and so the stop words removal process was moved there with great success.
 
-With regards to the StemmingAnalyzer, we switched the type of cache from "least recently used" (LRU) to an unbounded cache to decrease batch query time, but reduce memory performance. As a number of queries are being performed in quick succession, it may be necessary to use a number of cached stemming words. Since it can be assumed that the index is relatively small, and the memory capacity large, this unbounded cache may give a performance boost with no detriment due to the larger memory footprint.
+With regards to the StemmingAnalyzer, we switched the type of cache from "least recently used" (LRU) to an unbounded cache to decrease batch query time, but this reduced memory performance. As a number of queries are being performed in quick succession, it may be necessary to use a number of cached stemming words. Since it can be assumed that the index is relatively small, and the memory capacity large, this unbounded cache may give a performance boost with no detriment due to the larger memory footprint.
 
-We switched to using "OR" grouping versus "AND" grouping, which means that any of terms could, but do not have to, exist in any order, instead of all words existing in a document. This allowed more results to be returned in a query.
+For query text, the words in each query could be joined with a multitude of keywords. We switched to using "OR" grouping instead of "AND" grouping, which means that any of terms could, but do not have to, exist in any order, instead of requiring all words be present at the same time in the same document. This allowed more results to be returned in a query, and therefore more relevant results to be matched to any given query.
 
-Discussion of Results
+Stepping Stone to Results
 ---
 
-In the initial run, we ran with BM25F Weighting. We decided to test against TF-IDF weighting to compare the differences. Below we list the results after running the queries against trec_eval. It is clear that BM25F is better, which is why we reverted to using that weighting algorithm. This is probably due to the BM25F algorithm using a probablistic weighting scheme.
+In the initial run, we ran with BM25 Weighting. We decided to test against TF-IDF weighting to compare the differences. Below we list the results after running the queries against trec_eval. 
 
-|                       |  BM25F Weighting     |  TF-IDF Weighting   |
+|                       | BM25 Weighting       | TF-IDF Weighting    |
 |-----------------------|----------------------|---------------------|
 | runid                 |  all awesomenessRun  |  all awesomenessRun |
 | num_q                 |  all 49              |  all 49             |
@@ -240,8 +240,25 @@ In the initial run, we ran with BM25F Weighting. We decided to test against TF-I
 | P_500                 |  all 0.0771          |  all 0.0778         |
 | P_1000                |  all 0.0450          |  all 0.0450         |
 
-Our mean average precision stood at about 25-26% throughout all queries. Using BM25F our general precision is quite a bit higher in most areas with about 6-13% higher precision than the respective score for TF-IDF. TF-IDF did retrieve slightly more relevant results (4 more to be exact), however the precision was, as previously mentioned, less precise.
 
-With regards to the number of relevant documents versus those retrieved, we have 83.44% for BMF25 and 83.59% for TF-IDF. Both of these values seem to represent a large portion of the relevant documents available.
+It is clear that BM25 is better, which is why we reverted to using that weighting algorithm.
 
-In the end, with about 83-84% of the relvant documents retrieved and about a 26% precision, the indexing and retrieval performed by this project presents a fairly good representation of the relevant documents and a good result.
+TODO
+---
+- write a README file (plain text or Word format) [15 points for this report] including:
+  * √ your names and student numbers. Specify how the tasks were divided between the team members
+  * √ a detailed note about the functionality of your programs
+  * √ complete instructions on how to run them
+  * √ Explain the algorithms, data structures, and optimizations that you used in each of the three steps. 
+  * √ How big was the vocabulary? 
+  * √ Include a sample of 100 tokens from your vocabulary. 
+  * √ Include the first 10 answers to queries 1 and 25. 
+  * √ Touch up README
+  * Discuss your final results.
+  * Transfer to Google Doc (then to word doc)
+
+- √ include the file named Results with the results for all the 49 test queries, in the required format.
+- √ make sure all your programs run correctly.
+- submit your assignment, including programs, README file, and Results file, as a zip file through Blackboard Learn.
+- **don’t include the initial text collection or any external tools.**
+
