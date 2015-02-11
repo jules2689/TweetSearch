@@ -205,9 +205,10 @@ For query text, the words in each query could be joined with a multitude of keyw
 Stepping Stone to Results
 ---
 
-In the initial run, we ran with BM25 Weighting. We decided to test against TF-IDF weighting to compare the differences. Below we list the results after running the queries against trec_eval. 
+In the initial run, we ran with BM25F Weighting. We decided to test against TF-IDF weighting to compare the differences. Below we list the results after running the queries against trec_eval.
 
-|                       | BM25 Weighting       | TF-IDF Weighting    |
+
+|                       |  BM25F Weighting     |  TF-IDF Weighting   |
 |-----------------------|----------------------|---------------------|
 | runid                 |  all awesomenessRun  |  all awesomenessRun |
 | num_q                 |  all 49              |  all 49             |
@@ -240,25 +241,14 @@ In the initial run, we ran with BM25 Weighting. We decided to test against TF-ID
 | P_500                 |  all 0.0771          |  all 0.0778         |
 | P_1000                |  all 0.0450          |  all 0.0450         |
 
+Discussion of Results
 
-It is clear that BM25 is better, which is why we reverted to using that weighting algorithm.
+It is clear that BM25F is better, which is why we reverted to using that weighting algorithm. This is probably due to the BM25F algorithm using a probablistic weighting scheme.
 
-TODO
----
-- write a README file (plain text or Word format) [15 points for this report] including:
-  * √ your names and student numbers. Specify how the tasks were divided between the team members
-  * √ a detailed note about the functionality of your programs
-  * √ complete instructions on how to run them
-  * √ Explain the algorithms, data structures, and optimizations that you used in each of the three steps. 
-  * √ How big was the vocabulary? 
-  * √ Include a sample of 100 tokens from your vocabulary. 
-  * √ Include the first 10 answers to queries 1 and 25. 
-  * √ Touch up README
-  * Discuss your final results.
-  * Transfer to Google Doc (then to word doc)
+Our mean average precision stood at about 25-26% throughout all queries. Using BM25F our general precision is quite a bit higher in most areas with about 6-13% higher precision than the respective score for TF-IDF. TF-IDF did retrieve slightly more relevant results (4 more to be exact), however the precision was, as previously mentioned, less precise.
 
-- √ include the file named Results with the results for all the 49 test queries, in the required format.
-- √ make sure all your programs run correctly.
-- submit your assignment, including programs, README file, and Results file, as a zip file through Blackboard Learn.
-- **don’t include the initial text collection or any external tools.**
+With regards to the number of relevant documents versus those retrieved, we have 83.44% for BMF25 and 83.59% for TF-IDF. Both of these values seem to represent a large portion of the relevant documents available.
+
+In the end, with about 83-84% of the relvant documents retrieved and about a 26% precision, the indexing and retrieval performed by this project presents a fairly good representation of the relevant documents and a good result.
+
 
