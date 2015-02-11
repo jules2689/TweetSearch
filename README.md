@@ -202,6 +202,44 @@ With regards to the StemmingAnalyzer, we switched the type of cache from "least 
 
 We switched to using "OR" grouping versus "AND" grouping, which means that any of terms could, but do not have to, exist in any order, instead of all words existing in a document. This allowed more results to be returned in a query.
 
+Stepping Stone to Results
+---
+
+In the initial run, we ran with BM25 Weighting. We decided to test against TF-IDF weighting to compare the differences. Below we list the results after running the queries against trec_eval. It is clear that BM25 is better, which is why we reverted to using that weighting algorithm.
+
+|                       | BM25 Weighting       | TF-IDF Weighting    |
+|-----------------------|----------------------|---------------------|
+| runid                 |  all awesomenessRun  |  all awesomenessRun |
+| num_q                 |  all 49              |  all 49             |
+| num_ret               |  all 40773           |  all 40773          |
+| num_rel               |  all 2640            |  all 2640           |
+| num_rel_ret           |  all 2203            |  all 2207           |
+| map                   |  all 0.2560          |  all 0.1918         |
+| gm_map                |  all 0.1954          |  all 0.1294         |
+| Rprec                 |  all 0.3018          |  all 0.2100         |
+| bpref                 |  all 0.2747          |  all 0.1825         |
+| recip_rank            |  all 0.5820          |  all 0.4555         |
+| iprec_at_recall_0.00  |  all 0.6527          |  all 0.5121         |
+| iprec_at_recall_0.10  |  all 0.5221          |  all 0.3512         |
+| iprec_at_recall_0.20  |  all 0.4313          |  all 0.2996         |
+| iprec_at_recall_0.30  |  all 0.3600          |  all 0.2783         |
+| iprec_at_recall_0.40  |  all 0.3265          |  all 0.2504         |
+| iprec_at_recall_0.50  |  all 0.2724          |  all 0.2297         |
+| iprec_at_recall_0.60  |  all 0.1993          |  all 0.1898         |
+| iprec_at_recall_0.70  |  all 0.1533          |  all 0.1489         |
+| iprec_at_recall_0.80  |  all 0.1093          |  all 0.1172         |
+| iprec_at_recall_0.90  |  all 0.0716          |  all 0.0608         |
+| iprec_at_recall_1.00  |  all 0.0135          |  all 0.0100         |
+| P_5                   |  all 0.3510          |  all 0.2490         |
+| P_10                  |  all 0.3388          |  all 0.2571         |
+| P_15                  |  all 0.3252          |  all 0.2653         |
+| P_20                  |  all 0.3020          |  all 0.2592         |
+| P_30                  |  all 0.2714          |  all 0.2395         |
+| P_100                 |  all 0.1906          |  all 0.1531         |
+| P_200                 |  all 0.1347          |  all 0.1288         |
+| P_500                 |  all 0.0771          |  all 0.0778         |
+| P_1000                |  all 0.0450          |  all 0.0450         |
+
 TODO
 ---
 - write a README file (plain text or Word format) [15 points for this report] including:
