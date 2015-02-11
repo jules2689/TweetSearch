@@ -16,7 +16,9 @@ How to run
  1. Run `pip install -r requirements.txt`
  2. Run `python -i run.py`
  3. Wait for the index to occur
- 4. Batch Queries are then performed and results are printed onto the screen.
+ 4. Batch Queries are then performed and results are printed into "results.txt".
+ 5. Term Stats (number of terms in vocabulary and a sample of 100 terms) is output to "term_stats.txt"
+ 6. Top Results are output to "topResults.txt"
 
 How to Evaluate
 ---
@@ -42,6 +44,8 @@ The work was divided in a very ad-hoc manner, combined with a bit of Agile devel
  6. Report
  7. Cleanup and Verification of Code
  8. Optimizations
+ 9. Stats based results
+ 10. Verification of Report
 
 During the initial stages, Julian started by writing a small preprocessing script. This was developed at first to present a simple word frequency pattern.
 
@@ -58,6 +62,10 @@ During the reporting phase, Julian took the time to split up classes that had be
 Optimizations were then performed by both team members. These optimizations were determined through analysis, evaluation and discussions.
 
 Discussions were held between the team members throughout the project to determine which sections must be completed and which goals we were to reach.
+
+Stats based results include term-based stat numbers (such as vocabulary size), selections of terms and select query results. These tasks were split among both members of the team.
+
+The last run through of the report was performed by both members of the team.
 
 ---
 
@@ -190,6 +198,7 @@ Initial optimizations included adding stop words. Initially, no stop words were 
 
 With regards to the StemmingAnalyzer, we switched the type of cache from "least recently used" (LRU) to an unbounded cache to decrease batch query time, but reduce memory performance. As a number of queries are being performed in quick succession, it may be necessary to use a number of cached stemming words. Since it can be assumed that the index is relatively small, and the memory capacity large, this unbounded cache may give a performance boost with no detriment due to the larger memory footprint.
 
+Other optimizations applied include the following. We switched to using "OR" grouping versus "AND" grouping, which means that any of terms could exist in any order, instead of all words existing in a document. This allowed more results to be returned in a query.
 
 TODO
 ---
@@ -201,7 +210,7 @@ TODO
   * √ How big was the vocabulary? 
   * √ Include a sample of 100 tokens from your vocabulary. 
   * √ Include the first 10 answers to queries 1 and 25. 
-  * Touch up README
+  * √ Touch up README
   * Discuss your final results.
   * Transfer to Google Doc (then to word doc)
 
