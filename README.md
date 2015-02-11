@@ -49,21 +49,23 @@ The work was divided in a very ad-hoc manner, combined with a bit of Agile devel
 
 During the initial stages, Julian started by writing a small preprocessing script. This was developed at first to present a simple word frequency pattern.
 
-After the initial preprocessing of the tweets, Emilienne worked to integration Whoosh to perform our indexing and our retrieval/ranking. Whoosh provided a good backbone for both of these features so that they went hand in hand.
+After the initial preprocessing of the tweets, Emilienne worked to integrate Whoosh library to perform our indexing and our retrieval/ranking. Whoosh provided a good backbone for both of these features so that they went hand in hand.
 
-Emilienne then provided the outputted results in the correct format since these are a result of the retrieval process.
+Then, the queries to be used in the evaluations were parsed, we used the BeautifulSoup library to parse this html text and retrieve the unique query ids, and query text content.
 
-Next, Evaluation was used to determine weak points in the indexing method. Once these weak points were discovered, optimization stories were further flushed out. This was determined by both team members.
+Emilienne then provided the outputted results from the searcher in the correct format and printed them to file.
 
-The Report was then started as a way to take note and verify the code structure (as the functionality portion was filled in). This report was started by Julian.
+Next, several test runs were carried out, to determine weak points in the indexing method. Once these weak points were discovered, optimization stories were further flushed out. This was determined by both team members.
+
+The Report was then started as a way to take note and verify the code structure (as the functionality portion was filled in). This report was fleshed out by Julian.
 
 During the reporting phase, Julian took the time to split up classes that had become too large and cleanup the code. He split the concerns of various sections into their own classes and renamed code where necessary. He removed unused requirements and imports, as well as vestigial methods.
 
 Optimizations were then performed by both team members. These optimizations were determined through analysis, evaluation and discussions.
 
-Discussions were held between the team members throughout the project to determine which sections must be completed and which goals we were to reach.
+Discussions were held between the team members throughout the project to determine which sections must be completed and which goals we were to reach. Once initial results came in, brainstorming sessions were held to think of ways to improve them, and implemented by both Julian and Emilienne.
 
-Stats based results include term-based stat numbers (such as vocabulary size), selections of terms and select query results. These tasks were split among both members of the team.
+Outputting of stats based results (including the term-based stat numbers (such as vocabulary size), the selections of terms and the selection of query results) was split among both members of the team.
 
 The last run through of the report was performed by both members of the team.
 
@@ -75,7 +77,7 @@ Functionality
  - The `BatchRunQueries` script first setups up a `Indexer` object which initially calls the `Preprocessing` script, which removes all invalid information (punctuation etc.).
  - The `Indexer` then creates an index on the resulting text.
  - Next, `BatchRunQueries` extracts all queries from the `topics_MB1-50.txt` and extracts individual queries using the `BeautifulSoup` Library, an information scraping library for Python.
- - After the queries are parsed, the script runs each query against the `Indexer` one by one.
+ - After the queries are parsed, the script runs each query against the `Indexer` one by one, and prints the results.
 
 ### Preprocessing
 
