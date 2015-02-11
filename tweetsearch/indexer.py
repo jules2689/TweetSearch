@@ -42,7 +42,7 @@ class Indexer:
     qp = QueryParser("content", schema=self.schema, group=qparser.OrGroup)
     q = qp.parse(search_query)
 
-    with self.index.searcher(weighting=scoring.TF_IDF()) as searcher:
+    with self.index.searcher() as searcher:
       results = searcher.search(q, limit=1000)
       reader = self.index.reader()
       self.print_results_to_file(search_query_num, search_query, results)
