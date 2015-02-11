@@ -15,7 +15,7 @@ How to run
 ---
  1. Run `pip install -r requirements.txt`
  2. Run `python -i run.py`
- 3. Wait for the index to occur
+ 3. Wait for the indexing to occur
  4. Batch Queries are then performed and results are printed into "results.txt".
  5. Term Stats (number of terms in vocabulary and a sample of 100 terms) is output to "term_stats.txt"
  6. Top Results are output to "topResults.txt"
@@ -242,6 +242,7 @@ In the initial run, we ran with BM25F Weighting. We decided to test against TF-I
 | P_1000                |  all 0.0450          |  all 0.0450         |
 
 Discussion of Results
+---
 
 It is clear that BM25F yielded better results, which is why we reverted to using that weighting algorithm. This is probably due to the BM25F algorithm using a probablistic weighting scheme. 
 
@@ -250,5 +251,47 @@ Our mean average precision stood at about 25-26% throughout all queries. Using B
 With regards to the number of relevant documents versus those retrieved, we have 83.44% for BMF25 and 83.59% for TF-IDF. Both of these values seem to represent a large portion of the relevant documents available.
 
 In the end, with about 83-84% of the relvant documents retrieved and about a 26% precision, the indexing and retrieval performed by this project presents a fairly good representation of the relevant documents. 
+
+Statistics
+---
+
+The corpus size of the index was 45,899 documents/tweets, and 88,095 unique terms composed it. For 100 sample terms contained in the index, see the term_stats.txt document.
+
+Sample Results
+---
+
+#### Results for query 1:
+Query text: BBC World Service staff cuts 
+
+First 10 results:
+ - BBC News Major cuts to BBC World Service BBC World Service is to close five of its language services with th httpbbcine2vlpX
+ - Major cuts to BBC World Service BBC World Service is to close five of its language services with the likely lo httpbbcineftjNe
+ - BBC World Service axes five language services AFP  AFP  The BBC World Service has said it will close five o httpowly1b23Gf
+ - BBC News  BBC World Service cuts to be outlined to staff httpwwwbbccouknewsentertainmentarts12283356
+ - BBC Caribbean to be shut down  Stabroek News  Guyana BBC BBC World Service today announced cuts which will  httpbitlyh9huts
+ - BBC World Service plans 650 job cuts AP  AP  The BBC said Wednesday that it plans to cut 650 jobs more tha httpowly1b2u20
+ - One understands that the BBC World Service is to be renamed BBC Almost the Entire World Service
+ - RT QueenUK One understands that the BBC World Service is to be renamed BBC Almost the Entire World Service
+ - BBC World Service axes five languages 650 jobs AFP AFP  The BBC World Service said Wednesday it would  httpbitlyf1uNCb
+ - BBC World to slash five foreign services THE BBC World Service will shed around 500 jobs after announcing plans httpbitlyfR3vd8
+
+#### Results for query 25:
+
+Query text: TSA airport screening 
+
+First 10 results:
+ - The TSAs New Scanners Spot Bombs Not Dongs Tsa httpdlvritFZn1C Tsa ãGIZMODEã
+ - TSA to vote on unionizing in March Great So when TSA employee gropes you youll have 5 other TSA guys standing around supervising tcot
+ - TSA to Test New Screening at HartsfieldJackson The TSA in coming days at HartsfieldJackson Atlanta Internatio httpbitlye8NW0S
+ - Background Screening  Top 5 Reasons to Organize Background Screening Background screening is becoming more pre httpbitlyiktHdI
+ - The TSA has a unique ability to make an airport seem busy even when it isnt tsa
+ - Power grab TSA fights to stop private screeners at airports despite new Congress and flyers wanting them httpbitlyfX0Qyd tsa
+ - New post Seattle man acquitted in TSA airport case See arrest video  Seattle Po httpbitlye1W2Wo TSABlogTeam BigSis Fascism TSA
+ - TF  Travel RT BitterAmerican TSA shuts door on private airport screening program  httpbitlyfx6Dgw cnn httpbitlyeADg2G
+ - TSA Shuts Down Private Airport Screen Program is headline now on wwwfedsmithcom
+ - TSA Shuts Door on Private Airport Screening Program â Patriot Update httppatriotupdatecom2451tsashutsdooronprivateairportscreeningprogramsmssstwitteratxt4d45868911137f910Â â¦ via AddThis
+
+
+
 
 
