@@ -32,7 +32,7 @@ Now when you run run.py it will take the query texts, and batch run them, and ju
 
 ---
 
-How was the work divided
+How the work was divided
 ---
 The work was divided in a very ad-hoc manner, combined with a bit of Agile development. What this means to say is that the requirements for this assignment was treated as a series of stories broken down as such:
 
@@ -243,12 +243,12 @@ In the initial run, we ran with BM25F Weighting. We decided to test against TF-I
 
 Discussion of Results
 
-It is clear that BM25F is better, which is why we reverted to using that weighting algorithm. This is probably due to the BM25F algorithm using a probablistic weighting scheme.
+It is clear that BM25F yielded better results, which is why we reverted to using that weighting algorithm. This is probably due to the BM25F algorithm using a probablistic weighting scheme. 
 
-Our mean average precision stood at about 25-26% throughout all queries. Using BM25F our general precision is quite a bit higher in most areas with about 6-13% higher precision than the respective score for TF-IDF. TF-IDF did retrieve slightly more relevant results (4 more to be exact), however the precision was, as previously mentioned, less precise.
+Our mean average precision stood at about 25-26% throughout all queries. Using BM25F our general precision is quite a bit higher in most areas with about 6-13% higher precision than the respective score for TF-IDF. TF-IDF did retrieve slightly more relevant results (4 more to be exact), however the precision was, as previously mentioned, lower.
 
 With regards to the number of relevant documents versus those retrieved, we have 83.44% for BMF25 and 83.59% for TF-IDF. Both of these values seem to represent a large portion of the relevant documents available.
 
-In the end, with about 83-84% of the relvant documents retrieved and about a 26% precision, the indexing and retrieval performed by this project presents a fairly good representation of the relevant documents and a good result.
+In the end, with about 83-84% of the relvant documents retrieved and about a 26% precision, the indexing and retrieval performed by this project presents a fairly good representation of the relevant documents. 
 
 
