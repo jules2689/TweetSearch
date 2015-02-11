@@ -8,6 +8,7 @@ from whoosh.fields import *
 from whoosh.qparser import QueryParser
 from whoosh.analysis import StemmingAnalyzer
 from whoosh import scoring
+from whoosh import qparser
 
 import preprocessing as Preprocessing
 
@@ -34,7 +35,7 @@ class Indexer:
     self.index = self.whoosh_it()
 
   def query(self, search_query_num, search_query):
-    qp = QueryParser("content", schema=self.schema)
+    qp = QueryParser("content", schema=self.schema, group=qparser.OrGroup)
     q = qp.parse(search_query)
 
     with self.index.searcher(weighting=scoring.TF_IDF()) as searcher:
