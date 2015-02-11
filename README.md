@@ -198,11 +198,12 @@ TODO
   * √ a detailed note about the functionality of your programs
   * √ complete instructions on how to run them
   * √ Explain the algorithms, data structures, and optimizations that you used in each of the three steps. 
-  * How big was the vocabulary? 
-  * Include a sample of 100 tokens from your vocabulary. 
-  * Include the first 10 answers to queries 1 and 25. 
+  * √ How big was the vocabulary? 
+  * √ Include a sample of 100 tokens from your vocabulary. 
+  * √ Include the first 10 answers to queries 1 and 25. 
+  * Touch up README
   * Discuss your final results.
-
+  * Transfer to Google Doc (then to word doc)
 
 - √ include the file named Results with the results for all the 49 test queries, in the required format.
 - √ make sure all your programs run correctly.
